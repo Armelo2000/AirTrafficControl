@@ -128,12 +128,12 @@ void SystemManager::initPSR() {
     pthread_t PSR_thread_id;
 
     // Create a dynamic instance of the PSR class
-    //PSR *psr = new PSR(AircraftSchedule);
+    PSR *psr = new PSR(AircraftSchedule);
 
-   // err_no = pthread_create(&PSR_thread_id,
-   //                         NULL,
-   //                         &threadExecutionToPSR,
-   //                         psr);
+    err_no = pthread_create(&PSR_thread_id,
+                            NULL,
+                            &threadExecutionToPSR,
+                           psr);
     if (err_no != 0) {
        // cout << "ERROR when creating PSR thread: " << err_no << endl;
     } else {
@@ -214,7 +214,7 @@ void* SystemManager::threadUpdateAircraftPosition(void *aircraft) {
  */
 void* SystemManager::threadExecutionToPSR(void *psr) {
 
-    //static_cast<PSR*>(psr)->execute();
+    static_cast<PSR*>(psr)->execute();
 
     return NULL;
 }
@@ -229,8 +229,9 @@ void* SystemManager::threadExecutionToPSR(void *psr) {
 
 void* SystemManager::threadExecutionToSSR(void *ssr) {
 
-    //static_cast<PSR*>(ssr)->execute();
+    static_cast<PSR*>(ssr)->execute();
     return NULL;
+    //pthread_exit(NULL);
 }
 /* -----------------------------------------------------------------------------
  * Name:		execute
@@ -322,16 +323,16 @@ void SystemManager::spawnNewAircraftThreads(Aircraft &nextAircraft) {
     int err_no;
     pthread_t thread_id;
 
-    err_no = 0; //pthread_create(&thread_id,
-    //NULL, &fwdUpdateAircraftPosition, &nextAircraft);
+    err_no = pthread_create(&thread_id,
+    NULL, &threadUpdateAircraftPosition, &nextAircraft);
     if (err_no != 0) {
         cout << "ERROR when creating thread: " << err_no << endl;
     } else {
         cout << " Aircraft Update position thread created with ID: " << thread_id << endl;
     }
 
-    err_no = 0; // pthread_create(&thread_id,
-       //NULL, &fwdServiceInterrogationSignal, &nextAircraft);
+    err_no = pthread_create(&thread_id,
+       NULL, &threadServiceInterrogationSignal, &nextAircraft);
        if (err_no != 0) {
            cout << "ERROR when creating thread: " << err_no << endl;
        } else {
