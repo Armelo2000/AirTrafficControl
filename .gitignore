@@ -1,5 +1,7 @@
 # User
 Debug
+.settings
+.exe
 
 # Prerequisites
 *.d

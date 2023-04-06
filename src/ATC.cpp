@@ -24,7 +24,7 @@ int main() {
 	Aircraft* Airline4 = new Aircraft(4, 100, 5, 70, 0, 11, 24);
 	Aircraft* Airline5 = new Aircraft(5, 24, 125, 8, 0, 105, 18);
 
-	const char* input_file = "/Data/input_flyby.txt";
+	const char* input_file = "./Data/input_flyby.txt";
 	   vector<Aircraft> aircraftSchedule;
 
 	   DataParser parser(input_file);
