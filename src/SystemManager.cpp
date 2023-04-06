@@ -6,8 +6,8 @@
  */
 
 #include "inc/SystemManager.h"
-//#include "PSR.h"
-//#include "SSR.h"
+#include "inc/PSR.h"
+#include "inc/SSR.h"
 
 /* -----------------------------------------------------------------------------
  * This is the constructor of the SystemManager class, which
