@@ -135,9 +135,9 @@ void SystemManager::initPSR() {
                             &threadExecutionToPSR,
                            psr);
     if (err_no != 0) {
-       // cout << "ERROR when creating PSR thread: " << err_no << endl;
+       cout << "ERROR when creating PSR thread: " << err_no << endl;
     } else {
-       // cout << " PSR with thread ID: " << PSR_thread_id << " created" << endl;
+       cout << " PSR with thread ID: " << PSR_thread_id << " created" << endl;
     }
 
 }
@@ -294,7 +294,7 @@ int SystemManager::createAircraftTransponderDataChannel() {
 
         int chid = 0; //ChannelCreate(0);
         if (chid == -1) {
-            //cout << "Error: ChannelCreate failed. Error ID: "<< strerror(errno) << endl;
+            cout << "Error: ChannelCreate failed. Error ID: "<< strerror(errno) << endl;
             exit(EXIT_FAILURE);
         }
 

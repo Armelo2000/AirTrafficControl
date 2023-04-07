@@ -7,15 +7,15 @@
 
 #include "inc/Aircraft.h"
 
-Aircraft::Aircraft(uint32_t id, Coordinate x, Coordinate y, Coordinate z,
-			 Speed x_speed, Speed y_speed, Speed z_speed):
+Aircraft::Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, Coordinate z,
+			 Speed x_speed, Speed y_speed, Speed z_speed): boundary_time(time),
 			 ID(id), xPosition(x), yPosition(y), zPosition(z),
 			 xSpeed(x_speed), ySpeed(y_speed), zSpeed(z_speed){
 
 }
 
-Aircraft::Aircraft(uint32_t id, Coordinate x, Coordinate y, Coordinate z):
-			 ID(id), xPosition(x), yPosition(y), zPosition(z),
+Aircraft::Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, Coordinate z):
+			 boundary_time(time), ID(id), xPosition(x), yPosition(y), zPosition(z),
 			 xSpeed(0), ySpeed(0), zSpeed(0){
 
 }
@@ -169,7 +169,7 @@ void Aircraft::ServiceInterrogationSignal(){
     int rcvid = 0; //MsgReceive(transponderDataChannel, &interrogationSignal, sizeof(interrogationSignal), NULL);
 
     if (rcvid == -1) {
-        //cout << "Failed to receive message in aircraft. Error Code: " << strerror(errno) << endl;
+        cout << "Failed to receive message in aircraft. Error Code: " << strerror(errno) << endl;
        exit(EXIT_FAILURE);
     }
     else
@@ -190,7 +190,7 @@ void Aircraft::ServiceInterrogationSignal(){
     //TODO MsgReply is removed in Eclipse IDE
    int returnCode = 0; //MsgReply(rcvid, EOK, &reply_msg, sizeof(reply_msg));
    if (returnCode == -1) {
-       //cout << "Failed to send reply message in ServiceInterrogationSignal. Error Code: " << strerror(errno) << endl;
+       cout << "Failed to send reply message in ServiceInterrogationSignal. Error Code: " << strerror(errno) << endl;
        exit(EXIT_FAILURE);
    }
 

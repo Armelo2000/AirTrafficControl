@@ -71,11 +71,11 @@ void SSR::interrogateAircraft(Aircraft *targetAircraft){
 
     if (returnCode != -1) {
         cout <<"Aircraft reply\n";
-            }
+    }
     else{
         cout << "MsgSend failed. Error Code: " << strerror(errno) << endl;
         return;
-        }
+     }
 
     //ConnectDetach(coid);
 
