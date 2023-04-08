@@ -11,7 +11,7 @@
 #include <vector>
 #include "inc/Aircraft.h"
 
-
+//Definition of Parameters for the first aircraft
 #define BOUNDARY_TIME_START		100
 #define FLIGTH_ID_START			1
 #define XPOSITION_START			20000
@@ -21,6 +21,7 @@
 #define YSPEED_START			800
 #define ZSPEED_START			1200
 
+//Parameter for the Increment for the other aircrafts
 #define BOUNDARY_TIME_INC		80
 #define XPOSITION_INC   		300
 #define YPOSITION_INC			260
@@ -29,6 +30,7 @@
 #define YSPEED_INC				320
 #define ZSPEED_INC				120
 
+//Number of Aircraft for the simulation
 #define N						50 //This is the number of plane
 
 
