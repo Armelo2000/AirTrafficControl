@@ -11,6 +11,7 @@
 #include "inc/Aircraft.h"
 #include "inc/SystemManager.h"
 #include "inc/DataParser.h"
+#include "inc/Airspace.h"
 
 
 using namespace std;
@@ -24,6 +25,8 @@ int main() {
 	//Aircraft* Airline4 = new Aircraft(20, 4, 100, 5, 70, 0, 11, 24);
 	//Aircraft* Airline5 = new Aircraft(380, 5, 24, 125, 8, 0, 105, 18);
 
+	Airspace* air = new Airspace();
+	air->registerAirCreaft();
 	const char* input_file = "./Data/input_flyby.txt";
 	   vector<Aircraft> aircraftSchedule;
 
