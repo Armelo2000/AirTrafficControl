@@ -19,14 +19,14 @@ using namespace std;
 class DataParser {
 public:
 	DataParser(const char* AircraftDataFile);
-    vector<Aircraft> getAircraftSchedule();
+    vector<Aircraft*> getAircraftSchedule();
     int parse();
     virtual ~DataParser();
 
 private:
 
     const char * m_aircraftDataFile;
-    vector<Aircraft> m_aircraftSchedule;
+    vector<Aircraft*> m_aircraftSchedule;
 };
 
 
