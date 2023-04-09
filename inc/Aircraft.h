@@ -94,6 +94,11 @@ public:
 
 	Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, Coordinate z);
 
+        //List of plane close to
+        vector<Aircraft*> aircraftCloseTo;
+
+        //Number of plane close to
+        unsigned int aircraftCloseToCount;   
 
 	/**********************************************
 	 * This Function return the ID of the Aircraft
