@@ -66,6 +66,10 @@ public:
 	void airspaceCheck_YPosition();
 	void airspaceCheck_ZPosition();
 
+        //this function log The aircraft history
+        //in a CSV file 
+        void log_history(Aircraft*);
+
 
 };
 
