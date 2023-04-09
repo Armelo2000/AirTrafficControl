@@ -38,6 +38,8 @@
 class Airspace{
 
 private:
+        //This constant variable are the definition
+        //of the 3D Airspace 
 	static const int AIRSPACE_XFEET			{100000};
 	static const int AIRSPACE_YFEET			{100000};
 	static const int AIRSPACE_ZFEET			{25000};
