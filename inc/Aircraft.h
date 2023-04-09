@@ -208,6 +208,11 @@ public:
 	 ********************************************************/
 	void receiveInterrogationSignal();
 
+        // This function check if two aircraft are
+        // closed. If it is closed to another aircraft
+        // the function return true otherwise false
+        bool isCloseTo(Aircraft* anotherAircraft);
+
 
 };
 
