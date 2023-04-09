@@ -68,6 +68,7 @@ public:
 
         void setAlarm(Aircraft* aircraft, Aircraft* closeTo);
 
+        void AirspaceUpdate();
 
 };
 
