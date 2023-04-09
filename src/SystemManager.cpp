@@ -25,7 +25,7 @@ SystemManager::SystemManager() {
  *              initializes the AircraftSchedule vector.
  * -----------------------------------------------------------------------------
  */
-SystemManager::SystemManager(vector<Aircraft> *AircraftArr) {
+SystemManager::SystemManager(vector<Aircraft*> *AircraftArr) {
 
     this->AircraftSchedule = AircraftArr;
 
@@ -164,13 +164,13 @@ void SystemManager::createAircraftThreads() {
 
     cout << "Creating Aircraft threads" << endl;
 
-    for (Aircraft &nextAircraft : *AircraftSchedule) {
+    for (Aircraft* nextAircraft : *AircraftSchedule) {
 
 
-        cout << &nextAircraft << endl;
+        cout << nextAircraft << endl;
         int chid = createAircraftTransponderDataChannel();
-        nextAircraft.setTransponderDataChannel(chid);
-        spawnNewAircraftThreads(nextAircraft);
+        nextAircraft->setTransponderDataChannel(chid);
+        spawnNewAircraftThreads(*nextAircraft);
     }
 }
 
@@ -318,13 +318,13 @@ void* SystemManager::threadServiceInterrogationSignal(void *aircraft) {
  *              creating the thread, an error message is printed.
  * -----------------------------------------------------------------------------
  */
-void SystemManager::spawnNewAircraftThreads(Aircraft &nextAircraft) {
+void SystemManager::spawnNewAircraftThreads(Aircraft* nextAircraft) {
 
     int err_no;
     pthread_t thread_id;
 
     err_no = pthread_create(&thread_id,
-    NULL, &threadUpdateAircraftPosition, &nextAircraft);
+    NULL, &threadUpdateAircraftPosition, nextAircraft);
     if (err_no != 0) {
         cout << "ERROR when creating thread: " << err_no << endl;
     } else {
@@ -332,7 +332,7 @@ void SystemManager::spawnNewAircraftThreads(Aircraft &nextAircraft) {
     }
 
     err_no = pthread_create(&thread_id,
-       NULL, &threadServiceInterrogationSignal, &nextAircraft);
+       NULL, &threadServiceInterrogationSignal, nextAircraft);
        if (err_no != 0) {
            cout << "ERROR when creating thread: " << err_no << endl;
        } else {
