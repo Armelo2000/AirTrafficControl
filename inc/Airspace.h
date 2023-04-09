@@ -55,7 +55,7 @@ private:
 	vector<Aircraft*> m_aircraftInAirspace;
 
 public:
-	void registerAirCreaft();
+	void registerAirCreaft(unsigned int count);
 	void UpdateList();
 
 	vector<Aircraft*> getAircraftSchedule();
