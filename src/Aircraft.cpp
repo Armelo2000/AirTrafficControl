@@ -197,6 +197,43 @@ void Aircraft::ServiceInterrogationSignal(){
    cout << "Finished servicing interrogation signal" << endl;
 }
 
+//This function check if an aircraft is closed to another 
+bool Aircraft::isCloseTo(Aircraft* anotherAircraft)
+{
+   if(anotherAircraft == nullptr) return false;
+
+   if(xPosition > anotherAircraft->xPosition){
+     if((xPosition - anotherAircraft->xPosition) <= 10000){
+       return true;
+     }
+   }else{
+     if((anotherAircraft->xPosition - xPosition) <= 10000){
+       return true;
+     }
+   }
+
+   if(yPosition > anotherAircraft->yPosition){
+     if((yPosition - anotherAircraft->yPosition) <= 10000){
+       return true;
+     }
+   }else{
+     if((anotherAircraft->yPosition - yPosition) <= 10000){
+       return true;
+     }
+   }
+
+   if(zPosition > anotherAircraft->zPosition){
+     if((zPosition - anotherAircraft->zPosition) <= 10000){
+       return true;
+     }
+   }else{
+     if((anotherAircraft->zPosition - zPosition) <= 10000){
+       return true;
+     }
+   }
+   return false;
+}
+
 /********************************************************
  * This function is called until the interrogation
  * arrives. The Interrogation signal move from IPC to
