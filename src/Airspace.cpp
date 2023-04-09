@@ -5,6 +5,7 @@
  *      Author: melah
  */
 
+#include <fstream>
 #include "inc/Airspace.h"
 #include "inc/Aircraft.h"
 
@@ -51,4 +52,20 @@ vector<Aircraft*> Airspace::getAircraftSchedule(){
 
 vector<Aircraft*> Airspace::getAircraftInAirspace(){
 	return this->m_aircraftInAirspace;
+}
+
+void Airspace::log_history(Aircraft* plane){
+
+      std::ofstream myfile;
+      myfile.open ("history.csv");
+      //The history should look like this
+      //Aircraft Id, x position, y position, z position,
+      //x speed, y speed, z speed
+
+      myfile << plane-> getID();
+      myfile << "c,s,v,\n";
+      myfile << "1,2,3.456\n";
+      
+      myfile.close();
+
 }
