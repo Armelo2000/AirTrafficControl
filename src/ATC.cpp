@@ -28,7 +28,7 @@ int main() {
 	Airspace* air = new Airspace();
 	air->registerAirCreaft();
 	const char* input_file = "./Data/input_flyby.txt";
-	   vector<Aircraft> aircraftSchedule;
+	   vector<Aircraft*> aircraftSchedule;
 
 	   DataParser parser(input_file);
 	   aircraftSchedule = parser.getAircraftSchedule();
