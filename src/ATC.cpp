@@ -13,23 +13,24 @@
 #include "inc/DataParser.h"
 #include "inc/Airspace.h"
 
+#define AIRCRAFT_COUNT    50
 
 using namespace std;
 
 int main() {
 
 	Airspace* airspace = new Airspace();
-        //This function register aircraft for the simulation 
-	airspace->registerAirCreaft();
-	const char* input_file = "./Data/input_flyby.txt";
+        //This function register N aircrafts for the simulation 
+        airspace->registerAirCreaft(AIRCRAFT_COUNT);
+
 	   vector<Aircraft*> aircraftSchedule;
 
-	   DataParser parser(input_file);
-	   aircraftSchedule = parser.getAircraftSchedule();
+	   aircraftSchedule = airspace->getAircraftSchedule();
 
 	   SystemManager SM(&aircraftSchedule);
 	   SM.execute();
 
+        //while (1);
 	cout << "Finish" << endl;
 	return 0;
 }
