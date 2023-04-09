@@ -62,9 +62,13 @@ void Airspace::log_history(Aircraft* plane){
       //Aircraft Id, x position, y position, z position,
       //x speed, y speed, z speed
 
-      myfile << plane-> getID();
-      myfile << "c,s,v,\n";
-      myfile << "1,2,3.456\n";
+      myfile << plane->getAircraftID() <<",";
+      myfile << plane->getXCoordinate()<<",";
+      myfile << plane->getYCoordinate()<<",";
+      myfile << plane->getZCoordinate()<<",";
+      myfile << plane->getXSpeed()<<",";
+      myfile << plane->getYSpeed()<<",";
+      myfile << plane->getZSpeed()<<"\n";
       
       myfile.close();
 
