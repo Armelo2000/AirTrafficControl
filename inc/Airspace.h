@@ -66,6 +66,8 @@ public:
         //in a CSV file 
         void log_history(Aircraft*);
 
+        void setAlarm(Aircraft* aircraft, Aircraft* closeTo);
+
 
 };
 
