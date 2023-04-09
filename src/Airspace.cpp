@@ -55,7 +55,8 @@ vector<Aircraft*> Airspace::getAircraftInAirspace(){
 }
 
 void Airspace::log_history(Aircraft* plane){
-
+    
+      if(plane == nullptr) return;
       std::ofstream myfile;
       myfile.open ("history.csv");
       //The history should look like this
