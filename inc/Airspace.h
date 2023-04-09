@@ -30,10 +30,6 @@
 #define YSPEED_INC				320
 #define ZSPEED_INC				120
 
-//Number of Aircraft for the simulation
-#define N						50 //This is the number of plane
-
-
 
 class Airspace{
 
