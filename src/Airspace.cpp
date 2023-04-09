@@ -10,9 +10,9 @@
 #include "inc/Aircraft.h"
 
 
-void Airspace::registerAirCreaft(){
+void Airspace::registerAirCreaft(unsigned int count){
 	//register all plane
-	for(int i=0; i<N; i++){
+	for(int i=0; i<count; i++){
 		Aircraft* aircraft = new Aircraft(BOUNDARY_TIME_START + (BOUNDARY_TIME_INC * i),
 				FLIGTH_ID_START + i,
 				XPOSITION_START + (XPOSITION_INC * i), YPOSITION_START + (YPOSITION_INC * i),
