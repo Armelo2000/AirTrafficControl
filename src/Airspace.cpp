@@ -74,3 +74,16 @@ void Airspace::log_history(Aircraft* plane){
       myfile.close();
 
 }
+
+void Airspace::setAlarm(Aircraft* aircraft, Aircraft* closeTo){
+
+  //set the alarm
+  if((aircraft == nullptr) | (closeTo == nullptr)) return;
+
+   cout<<"ALARM IS SET - The aircraft with Id: "<<
+       aircraft->getAircraftID()<<" is close to
+       the aircraft with the Id: "<<
+       closeTo->getAircraftID ()<<end;
+
+}
+
