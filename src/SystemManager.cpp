@@ -29,10 +29,10 @@ SystemManager::SystemManager(vector<Aircraft*> *AircraftArr) {
 
     this->AircraftSchedule = AircraftArr;
 
-    cout << "Aircraft schedule: " << AircraftSchedule << endl;
+    //cout << "Aircraft schedule: " << AircraftSchedule << endl;
 
-    cout << "Aircraft a1: " << &AircraftSchedule[0] << endl;
-    cout << "Aircraft a2: " << &AircraftSchedule[1] << endl;
+    //cout << "Aircraft a1: " << &AircraftSchedule[0] << endl;
+    //cout << "Aircraft a2: " << &AircraftSchedule[1] << endl;
 
 }
 
