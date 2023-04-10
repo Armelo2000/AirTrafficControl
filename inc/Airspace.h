@@ -51,6 +51,7 @@ private:
 	vector<Aircraft*> m_aircraftInAirspace;
 
         unsigned int aircraftCount;
+        Airspace* instance;
 
 public:
         Airspace();
@@ -72,6 +73,8 @@ public:
         void setAlarm(Aircraft* aircraft, Aircraft* closeTo);
 
         void AirspaceUpdate();
+
+        static void update();
 
 };
 
