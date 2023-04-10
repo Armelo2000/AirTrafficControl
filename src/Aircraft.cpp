@@ -171,7 +171,7 @@ void Aircraft::ServiceInterrogationSignal(){
     cout << "Servicing interrogation signal" << endl;
     // Wait for a message on the channel
     //TODO MsgReceive is removed in Eclipse IDE
-    int rcvid = 0; //MsgReceive(transponderDataChannel, &interrogationSignal, sizeof(interrogationSignal), NULL);
+    int rcvid = MsgReceive(transponderDataChannel, &interrogationSignal, sizeof(interrogationSignal), NULL);
 
     if (rcvid == -1) {
         cout << "Failed to receive message in aircraft. Error Code: " << strerror(errno) << endl;
@@ -193,7 +193,7 @@ void Aircraft::ServiceInterrogationSignal(){
     reply_msg.speedZ      = this->zSpeed;
 
     //TODO MsgReply is removed in Eclipse IDE
-   int returnCode = 0; //MsgReply(rcvid, EOK, &reply_msg, sizeof(reply_msg));
+   int returnCode = MsgReply(rcvid, EOK, &reply_msg, sizeof(reply_msg));
    if (returnCode == -1) {
        cout << "Failed to send reply message in ServiceInterrogationSignal. Error Code: " << strerror(errno) << endl;
        exit(EXIT_FAILURE);
