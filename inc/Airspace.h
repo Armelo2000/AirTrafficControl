@@ -50,6 +50,8 @@ private:
 	//list of plane in the space
 	vector<Aircraft*> m_aircraftInAirspace;
 
+        unsigned int aircraftCount;
+
 public:
 	void registerAirCreaft(unsigned int count);
 	void UpdateList();
