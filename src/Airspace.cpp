@@ -106,9 +106,37 @@ void Airspace::AirspaceUpdate(){
          //Add to collision list and set alarm 
          setAlarm(aircraft, next);
 
+          if (std::find(aircraft->aircraftCloseTo.begin(), aircraft->aircraftCloseTo.end(), next) != aircraft->aircraftCloseTo.end()) {
+             // std::cout << "Element found";
+          }
+          else {
+              //std::cout << "Element not found";
+             aircraft->aircraftCloseTo.pushback(next);
+             aircraft->aircraftCloseToCount++;
+          }
+
+          if (std::find(next->aircraftCloseTo.begin(), next->aircraftCloseTo.end(), aircraft) != next->aircraftCloseTo.end()) {
+             // std::cout << "Element found";
+          }
+          else {
+              //std::cout << "Element not found";
+             next->aircraftCloseTo.pushback(aircraft);
+             next->aircraftCloseToCount++;
+          }
+
        } else {
          //Remove from collision list and reset alarm 
-    
+         if (std::find(aircraft->aircraftCloseTo.begin(), aircraft->aircraftCloseTo.end(), next) != aircraft->aircraftCloseTo.end()) {
+             //Remove next from the list 
+             aircraft->aircraftCloseTo.remove(next);
+             aircraft->aircraftCloseToCount--;
+          }
+          
+          if (std::find(next->aircraftCloseTo.begin(), next->aircraftCloseTo.end(), aircraft) != next->aircraftCloseTo.end()) {
+             //Remove aircraft from the list 
+             next->aircraftCloseTo.remove(aircraft);
+             next->aircraftCloseToCount--;
+          }
 
        }
 
