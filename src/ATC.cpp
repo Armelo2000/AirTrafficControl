@@ -11,28 +11,26 @@
 #include "inc/Aircraft.h"
 #include "inc/SystemManager.h"
 #include "inc/DataParser.h"
+#include "inc/Airspace.h"
 
+#define AIRCRAFT_COUNT    50
 
 using namespace std;
 
 int main() {
 
-	//Create 5 Aircrafts instances
-	Aircraft* Airline1 = new Aircraft(1, 12, 0, 35, 0, 15, 10);
-	Aircraft* Airline2 = new Aircraft(2, 20, 10, 44, 120, 15, 72);
-	Aircraft* Airline3 = new Aircraft(3, 0, 80, 65, 0, 60, 4);
-	Aircraft* Airline4 = new Aircraft(4, 100, 5, 70, 0, 11, 24);
-	Aircraft* Airline5 = new Aircraft(5, 24, 125, 8, 0, 105, 18);
+	Airspace* airspace = new Airspace();
+        //This function register N aircrafts for the simulation 
+        airspace->registerAirCreaft(AIRCRAFT_COUNT);
 
-	const char* input_file = "./Data/input_flyby.txt";
-	   vector<Aircraft> aircraftSchedule;
+	   vector<Aircraft*> aircraftSchedule;
 
-	   DataParser parser(input_file);
-	   aircraftSchedule = parser.getAircraftSchedule();
+	   aircraftSchedule = airspace->getAircraftSchedule();
 
 	   SystemManager SM(&aircraftSchedule);
 	   SM.execute();
 
-	cout << "" << endl; // prints 
+        //while (1);
+	cout << "Finish" << endl;
 	return 0;
 }

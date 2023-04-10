@@ -22,7 +22,7 @@ class SystemManager{
 public:
     // Constructors and destructor
 	SystemManager();
-	SystemManager(vector<Aircraft> *AircraftArr);
+	SystemManager(vector<Aircraft*> *AircraftArr);
     virtual ~SystemManager();
 
     // Initialization functions
@@ -51,12 +51,12 @@ public:
     void execute();
     void configureSimulation();
     void runSimulation();
-    void spawnNewAircraftThreads(Aircraft& nextAircraft);
+    void spawnNewAircraftThreads(Aircraft* nextAircraft);
 
 private:
     vector<int> aircraft_pids;
     vector<int> ATCS_pids;
-    vector<Aircraft> *AircraftSchedule;
+    vector<Aircraft*> *AircraftSchedule;
 
 };
 

@@ -17,7 +17,7 @@
 
 
 
-PSR::PSR(vector<Aircraft> *AircraftSchedule) {
+PSR::PSR(vector<Aircraft*> *AircraftSchedule) {
 
 	range = MAX_RANGE;
 	reference_angle = REFERENCE_ANGLE;
@@ -58,10 +58,10 @@ void PSR::detectAircraft(int angle){
 	int aircraftDistance; 			// Distance of the detected aircraft
 	double aircraftAngleRads; 		// Angle of the detected aircraft
 
-	for (Aircraft& aircraft : *aircraftList){
+	for (Aircraft* aircraft : *aircraftList){
 
 		// Get the aircraft angle in radians
-		aircraftAngleRads = 0; //TODO (atan2(aircraft.getYCoordinate(), aircraft.getXCoordinate()));
+		aircraftAngleRads = 0; //TODO (atan2(aircraft->getYCoordinate(), aircraft->getXCoordinate()));
 
 		   // Adjust the aircraft angle to be between 0 and 2*pi
 		   if (aircraftAngleRads < 0)
@@ -77,12 +77,12 @@ void PSR::detectAircraft(int angle){
 		   // Check if the aircraft is at the current radar angle
      		   if (aircraftAngleDegrees == angle){
 			   // Get the aircraft distance
-			   aircraftDistance = 0; // TODO (int) (sqrt(pow(aircraft.getXCoordinate(), 2) + pow(aircraft.getYCoordinate(), 2)));
+			   aircraftDistance = 0; // TODO (int) (sqrt(pow(aircraft->getXCoordinate(), 2) + pow(aircraft->getYCoordinate(), 2)));
 			   // Add the aircraft object to the array if it is within range
 			   if(aircraftDistance < range){
 
-				   cout << "Pushing back with address: " << &aircraft  << endl;
-				   illuminatedObjects.push_back(&aircraft);
+				   cout << "Pushing back with address: " << aircraft  << endl;
+				   illuminatedObjects.push_back(aircraft);
 			   	   cout << illuminatedObjects.size() << endl;
 			   }
 		   }
@@ -96,13 +96,13 @@ void PSR::rotateRadar(){
 }
 
 
-vector<Aircraft> PSR::sendAircraftPositionsToSSR(){
+vector<Aircraft*> PSR::sendAircraftPositionsToSSR(){
 
 //	cout << "Sending illuminated objects" << endl;
 //
-//	for (Aircraft& aircraft : illuminatedObjects){
+//	for (Aircraft* aircraft : illuminatedObjects){
 //
-//		cout << "Aircraft: " << aircraft.getFlightID() << endl;
+//		cout << "Aircraft: " << aircraft->getFlightID() << endl;
 //
 //	}
 

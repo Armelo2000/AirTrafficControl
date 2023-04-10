@@ -25,7 +25,7 @@ using namespace std;
 
 class PSR {
 public:
-	PSR(vector<Aircraft> *aircraftSchedule);
+	PSR(vector<Aircraft*> *aircraftSchedule);
 
 	void execute();
 	void test();
@@ -35,7 +35,7 @@ public:
 	bool receiveEchoes(int echoes[]);
 	Aircraft* determineDistances(int echoes[]);
 
-	vector<Aircraft> sendAircraftPositionsToSSR();
+	vector<Aircraft*> sendAircraftPositionsToSSR();
 
 	virtual ~PSR();
 
@@ -50,7 +50,7 @@ private:
 	int current_angle;
 	int pulse_speed;
 
-	vector<Aircraft> *aircraftList;
+	vector<Aircraft*> *aircraftList;
 	vector<Aircraft*> illuminatedObjects;
 
 };

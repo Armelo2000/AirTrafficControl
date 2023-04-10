@@ -6,18 +6,21 @@
  */
 
 #include "inc/Aircraft.h"
+//#include "inc/Airspace.h"
 
-Aircraft::Aircraft(uint32_t id, Coordinate x, Coordinate y, Coordinate z,
-			 Speed x_speed, Speed y_speed, Speed z_speed):
+Aircraft::Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, Coordinate z,
+			 Speed x_speed, Speed y_speed, Speed z_speed): boundary_time(time),
 			 ID(id), xPosition(x), yPosition(y), zPosition(z),
 			 xSpeed(x_speed), ySpeed(y_speed), zSpeed(z_speed){
 
+   aircraftCloseToCount = 0;
 }
 
-Aircraft::Aircraft(uint32_t id, Coordinate x, Coordinate y, Coordinate z):
-			 ID(id), xPosition(x), yPosition(y), zPosition(z),
+Aircraft::Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, Coordinate z):
+			 boundary_time(time), ID(id), xPosition(x), yPosition(y), zPosition(z),
 			 xSpeed(0), ySpeed(0), zSpeed(0){
 
+    aircraftCloseToCount = 0;
 }
 
 
@@ -146,6 +149,8 @@ void Aircraft::updateAircraftPosition(){
     updateYCoordinate();
     updateZCoordinate();
 
+    //Airspace::update();
+
     cout<<"Execution of Update position is finished..."<<endl;
 
 }
@@ -166,10 +171,10 @@ void Aircraft::ServiceInterrogationSignal(){
     cout << "Servicing interrogation signal" << endl;
     // Wait for a message on the channel
     //TODO MsgReceive is removed in Eclipse IDE
-    int rcvid = 0; //MsgReceive(transponderDataChannel, &interrogationSignal, sizeof(interrogationSignal), NULL);
+    int rcvid = MsgReceive(transponderDataChannel, &interrogationSignal, sizeof(interrogationSignal), NULL);
 
     if (rcvid == -1) {
-        //cout << "Failed to receive message in aircraft. Error Code: " << strerror(errno) << endl;
+        cout << "Failed to receive message in aircraft. Error Code: " << strerror(errno) << endl;
        exit(EXIT_FAILURE);
     }
     else
@@ -188,13 +193,50 @@ void Aircraft::ServiceInterrogationSignal(){
     reply_msg.speedZ      = this->zSpeed;
 
     //TODO MsgReply is removed in Eclipse IDE
-   int returnCode = 0; //MsgReply(rcvid, EOK, &reply_msg, sizeof(reply_msg));
+   int returnCode = MsgReply(rcvid, EOK, &reply_msg, sizeof(reply_msg));
    if (returnCode == -1) {
-       //cout << "Failed to send reply message in ServiceInterrogationSignal. Error Code: " << strerror(errno) << endl;
+       cout << "Failed to send reply message in ServiceInterrogationSignal. Error Code: " << strerror(errno) << endl;
        exit(EXIT_FAILURE);
    }
 
    cout << "Finished servicing interrogation signal" << endl;
+}
+
+//This function check if an aircraft is closed to another 
+bool Aircraft::isCloseTo(Aircraft* anotherAircraft)
+{
+   if(anotherAircraft == nullptr) return false;
+
+   if(xPosition > anotherAircraft->xPosition){
+     if((xPosition - anotherAircraft->xPosition) <= 10000){
+       return true;
+     }
+   }else{
+     if((anotherAircraft->xPosition - xPosition) <= 10000){
+       return true;
+     }
+   }
+
+   if(yPosition > anotherAircraft->yPosition){
+     if((yPosition - anotherAircraft->yPosition) <= 10000){
+       return true;
+     }
+   }else{
+     if((anotherAircraft->yPosition - yPosition) <= 10000){
+       return true;
+     }
+   }
+
+   if(zPosition > anotherAircraft->zPosition){
+     if((zPosition - anotherAircraft->zPosition) <= 10000){
+       return true;
+     }
+   }else{
+     if((anotherAircraft->zPosition - zPosition) <= 10000){
+       return true;
+     }
+   }
+   return false;
 }
 
 /********************************************************

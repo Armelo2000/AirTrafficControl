@@ -46,7 +46,7 @@ int DataParser::parse() {
 
         // Create an Aircraft object with the extracted data and add it to the aircraftSchedule vector
         //Aircraft aircraft(time_at_boundary, flight_id, pos_x, pos_y, pos_z, speed_x, speed_y, speed_z);
-    	Aircraft aircraft(flight_id, pos_x, pos_y, pos_z, speed_x, speed_y, speed_z);
+    	Aircraft* aircraft = new Aircraft(time_at_boundary, flight_id, pos_x, pos_y, pos_z, speed_x, speed_y, speed_z);
         m_aircraftSchedule.push_back(aircraft);
     }
 
@@ -62,7 +62,7 @@ int DataParser::parse() {
  * Description: This functions returns the aircraftSchedule vector.
  * -----------------------------------------------------------------------------
  */
-vector<Aircraft> DataParser::getAircraftSchedule() {
+vector<Aircraft*> DataParser::getAircraftSchedule() {
 
     return m_aircraftSchedule;
 }

@@ -14,7 +14,22 @@
 #include <stdint.h>
 #include "inc/TransponderData.h"
 
-typedef uint32_t Coordinate, Speed;
+#include <pthread.h>
+#include <vector>
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <errno.h>
+//#include <sys/neutrino.h> // For QNX message passing API
+#include <stdint.h> // For data type uint64_t
+//#include <sys/iofunc.h>
+//#include <sys/dispatch.h>
+#include <unistd.h>
+//#include <sys/netmgr.h>
+#include <sys/types.h>
+
+typedef int32_t Coordinate, Speed;
+typedef uint32_t BoundaryTime;
 
 using namespace std;
 
@@ -68,12 +83,22 @@ protected:
 	 */
 	int m_transponderDataChannel;
 
+	/*******************************************
+	 * Time at Boundary
+	 */
+	BoundaryTime boundary_time;
+
 public:
-	Aircraft(uint32_t id, Coordinate x, Coordinate y, Coordinate z,
+	Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, Coordinate z,
 			 Speed x_speed, Speed y_speed, Speed z_speed);
 
-	Aircraft(uint32_t id, Coordinate x, Coordinate y, Coordinate z);
+	Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, Coordinate z);
 
+        //List of plane close to
+        vector<Aircraft*> aircraftCloseTo;
+
+        //Number of plane close to
+        unsigned int aircraftCloseToCount;   
 
 	/**********************************************
 	 * This Function return the ID of the Aircraft
@@ -182,6 +207,11 @@ public:
 	 * Aircraft.
 	 ********************************************************/
 	void receiveInterrogationSignal();
+
+        // This function check if two aircraft are
+        // closed. If it is closed to another aircraft
+        // the function return true otherwise false
+        bool isCloseTo(Aircraft* anotherAircraft);
 
 
 };

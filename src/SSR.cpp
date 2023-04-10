@@ -49,15 +49,15 @@ void SSR::interrogateAircraft(Aircraft *targetAircraft){
     int chid = targetAircraft->getTransponderDataChannel();
 
     // Connecting the SSR to channel
-    int coid = 0; //ConnectAttach(ND_LOCAL_NODE ,0,chid,_NTO_SIDE_CHANNEL, 0);
+    int coid = ConnectAttach(ND_LOCAL_NODE ,0,chid,_NTO_SIDE_CHANNEL, 0);
     if (coid == -1) {
         perror("Failed to connect to Aircraft");
-        //ChannelDestroy(chid);
+        ChannelDestroy(chid);
         exit(EXIT_FAILURE);
     }
 
     cout << "Aircraft thread waiting for Interrogation signal..." << endl;
-    //targetAircraft.ServiceInterrogationSignal();
+    targetAircraft.ServiceInterrogationSignal();
     // Receive message
     TInterrogationSignal is;
     TTransponderData aircraftTransponderData;
@@ -65,19 +65,19 @@ void SSR::interrogateAircraft(Aircraft *targetAircraft){
 
 
     // Send the message to the Aircraft thread
-   // targetAircraft.ServiceInterrogationSignal(chid, pid);
+    targetAircraft.ServiceInterrogationSignal(chid, pid);
 
-    int returnCode = 0;  //MsgSend(coid, &is, sizeof(is), &aircraftTransponderData, sizeof(aircraftTransponderData));
+    int returnCode = MsgSend(coid, &is, sizeof(is), &aircraftTransponderData, sizeof(aircraftTransponderData));
 
     if (returnCode != -1) {
         cout <<"Aircraft reply\n";
-            }
+    }
     else{
         cout << "MsgSend failed. Error Code: " << strerror(errno) << endl;
         return;
-        }
+     }
 
-    //ConnectDetach(coid);
+    ConnectDetach(coid);
 
     cout <<  "Aircraft flightID is: " <<aircraftTransponderData.flightId << endl;
 
