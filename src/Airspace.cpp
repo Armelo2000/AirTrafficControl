@@ -47,7 +47,7 @@ void Airspace::registerAirCreaft(unsigned int count){
 								aircraft->getZCoordinate()<<endl;
 		}
 	}
-    aircraftCount = coun;
+    aircraftCount = count;
 }
 
 vector<Aircraft*> Airspace::getAircraftSchedule(){
@@ -92,9 +92,27 @@ void Airspace::setAlarm(Aircraft* aircraft, Aircraft* closeTo){
 }
 
 void Airspace::AirspaceUpdate(){
-  // Loop over aircrafts
-  for(int i=0; i<aircraftCount; i++){
+ 
+  if(aircraftCount <= 1) return;
 
+  int j = 0;
+   // Loop over aircrafts
+  for(int i=0; i<aircraftCount-1; i++){
+     j=i+1;
+     auto aircraft = m_aircraftInAirspace.at(i);
+     for(; j<aircraftCount; j++){
+       auto next = m_aircraftInAirspace.at(j);
+       if(aircraft->isCloseTo(next)){
+         //Add to collision list and set alarm 
+         setAlarm(aircraft, next);
+
+       } else {
+         //Remove from collision list and reset alarm 
+    
+
+       }
+
+    }
 
   }
 
