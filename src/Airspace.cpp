@@ -44,6 +44,7 @@ void Airspace::registerAirCreaft(unsigned int count){
 								aircraft->getZCoordinate()<<endl;
 		}
 	}
+    aircraftCount = coun;
 }
 
 vector<Aircraft*> Airspace::getAircraftSchedule(){
@@ -84,6 +85,16 @@ void Airspace::setAlarm(Aircraft* aircraft, Aircraft* closeTo){
        aircraft->getAircraftID()<<" is close to
        the aircraft with the Id: "<<
        closeTo->getAircraftID ()<<end;
+
+}
+
+void Airspace::AirspaceUpdate(){
+  // Loop over aircrafts
+  for(int i=0; i<aircraftCount; i++){
+
+
+  }
+
 
 }
 
