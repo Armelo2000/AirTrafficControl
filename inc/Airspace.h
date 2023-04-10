@@ -53,6 +53,7 @@ private:
         unsigned int aircraftCount;
 
 public:
+        Airspace();
 	void registerAirCreaft(unsigned int count);
 	void UpdateList();
 
