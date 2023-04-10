@@ -9,8 +9,11 @@
 #include "inc/Airspace.h"
 #include "inc/Aircraft.h"
 
+Airspace* Airspace::instance = nullptr;
+
 Airspace::Airspace(){
    aircraftCount = 0;
+   instance = this;
 }
 
 void Airspace::registerAirCreaft(unsigned int count){
@@ -144,6 +147,18 @@ void Airspace::AirspaceUpdate(){
 
   }
 
+
+}
+
+void Airspace::update(){
+   if(instance == nullptr) return;
+
+   instance->AirspaceUpdate();
+
+   for(auto aircraft : m_aircraftInAirspace){
+      //Log history
+      instance->log_history(aircraft);
+   }
 
 }
 
