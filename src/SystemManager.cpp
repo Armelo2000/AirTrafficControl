@@ -292,7 +292,7 @@ int SystemManager::createAircraftTransponderDataChannel() {
 
     // Create message passing channel
 
-        int chid = 0; //ChannelCreate(0);
+        int chid = ChannelCreate(0);
         if (chid == -1) {
             cout << "Error: ChannelCreate failed. Error ID: "<< strerror(errno) << endl;
             exit(EXIT_FAILURE);
