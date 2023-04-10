@@ -12,12 +12,14 @@ Aircraft::Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, C
 			 ID(id), xPosition(x), yPosition(y), zPosition(z),
 			 xSpeed(x_speed), ySpeed(y_speed), zSpeed(z_speed){
 
+   aircraftCloseToCount = 0;
 }
 
 Aircraft::Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, Coordinate z):
 			 boundary_time(time), ID(id), xPosition(x), yPosition(y), zPosition(z),
 			 xSpeed(0), ySpeed(0), zSpeed(0){
 
+    aircraftCloseToCount = 0;
 }
 
 
