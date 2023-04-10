@@ -9,6 +9,9 @@
 #include "inc/Airspace.h"
 #include "inc/Aircraft.h"
 
+Airspace::Airspace(){
+   aircraftCount = 0;
+}
 
 void Airspace::registerAirCreaft(unsigned int count){
 	//register all plane
