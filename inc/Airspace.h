@@ -51,7 +51,7 @@ private:
 	vector<Aircraft*> m_aircraftInAirspace;
 
         unsigned int aircraftCount;
-        Airspace* instance;
+        static Airspace* instance;
 
 public:
         Airspace();
