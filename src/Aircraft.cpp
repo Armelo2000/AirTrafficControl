@@ -6,7 +6,7 @@
  */
 
 #include "inc/Aircraft.h"
-#include "inc/Airspace.h"
+//#include "inc/Airspace.h"
 
 Aircraft::Aircraft(BoundaryTime time, uint32_t id, Coordinate x, Coordinate y, Coordinate z,
 			 Speed x_speed, Speed y_speed, Speed z_speed): boundary_time(time),
@@ -149,7 +149,7 @@ void Aircraft::updateAircraftPosition(){
     updateYCoordinate();
     updateZCoordinate();
 
-    Airspace::update();
+    //Airspace::update();
 
     cout<<"Execution of Update position is finished..."<<endl;
 
