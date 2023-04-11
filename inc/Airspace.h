@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "inc/Aircraft.h"
+#include <algorithm>
 
 //Definition of Parameters for the first aircraft
 #define BOUNDARY_TIME_START		100

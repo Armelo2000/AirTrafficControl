@@ -170,7 +170,7 @@ void SystemManager::createAircraftThreads() {
         cout << nextAircraft << endl;
         int chid = createAircraftTransponderDataChannel();
         nextAircraft->setTransponderDataChannel(chid);
-        spawnNewAircraftThreads(*nextAircraft);
+        spawnNewAircraftThreads(nextAircraft);
     }
 }
 

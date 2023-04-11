@@ -57,7 +57,7 @@ void SSR::interrogateAircraft(Aircraft *targetAircraft){
     }
 
     cout << "Aircraft thread waiting for Interrogation signal..." << endl;
-    targetAircraft.ServiceInterrogationSignal();
+    //targetAircraft.ServiceInterrogationSignal();
     // Receive message
     TInterrogationSignal is;
     TTransponderData aircraftTransponderData;
@@ -65,7 +65,7 @@ void SSR::interrogateAircraft(Aircraft *targetAircraft){
 
 
     // Send the message to the Aircraft thread
-    targetAircraft.ServiceInterrogationSignal(chid, pid);
+    //targetAircraft.ServiceInterrogationSignal(chid, pid);
 
     int returnCode = MsgSend(coid, &is, sizeof(is), &aircraftTransponderData, sizeof(aircraftTransponderData));
 

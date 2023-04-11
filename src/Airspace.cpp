@@ -88,9 +88,7 @@ void Airspace::setAlarm(Aircraft* aircraft, Aircraft* closeTo){
   if((aircraft == nullptr) | (closeTo == nullptr)) return;
 
    cout<<"ALARM IS SET - The aircraft with Id: "<<
-       aircraft->getAircraftID()<<" is close to
-       the aircraft with the Id: "<<
-       closeTo->getAircraftID ()<<end;
+       aircraft->getAircraftID()<<" is close to the aircraft with the Id: "<< closeTo->getAircraftID ()<<endl;
 
 }
 
@@ -114,7 +112,7 @@ void Airspace::AirspaceUpdate(){
           }
           else {
               //std::cout << "Element not found";
-             aircraft->aircraftCloseTo.pushback(next);
+             aircraft->aircraftCloseTo.push_back(next);
              aircraft->aircraftCloseToCount++;
           }
 
@@ -123,7 +121,7 @@ void Airspace::AirspaceUpdate(){
           }
           else {
               //std::cout << "Element not found";
-             next->aircraftCloseTo.pushback(aircraft);
+             next->aircraftCloseTo.push_back(aircraft);
              next->aircraftCloseToCount++;
           }
 
@@ -131,13 +129,13 @@ void Airspace::AirspaceUpdate(){
          //Remove from collision list and reset alarm 
          if (std::find(aircraft->aircraftCloseTo.begin(), aircraft->aircraftCloseTo.end(), next) != aircraft->aircraftCloseTo.end()) {
              //Remove next from the list 
-             aircraft->aircraftCloseTo.remove(next);
+             remove(aircraft->aircraftCloseTo.begin(), aircraft->aircraftCloseTo.end(), next);
              aircraft->aircraftCloseToCount--;
           }
           
           if (std::find(next->aircraftCloseTo.begin(), next->aircraftCloseTo.end(), aircraft) != next->aircraftCloseTo.end()) {
              //Remove aircraft from the list 
-             next->aircraftCloseTo.remove(aircraft);
+             remove(next->aircraftCloseTo.begin(), next->aircraftCloseTo.end(), aircraft);
              next->aircraftCloseToCount--;
           }
 
